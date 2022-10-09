@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <cs50.h>
+
+void swap(char *a, char *b);
+
+int main(void)
+{
+    char *original = get_string("c: "); //this has original address
+    char *new_memory_for_string = malloc(strlen(original) + 1); //this has a new address for original
+    printf("String in Original: %s\n", original);
+    printf("String in malloc(): %s\n", new_memory_for_string);
+    printf("Original address: %p\n", &original);
+    printf("Malloc() address: %p\n", &new_memory_for_string);
+    swap (original, new_memory_for_string);
+    printf("String in malloc(): %s\n", new_memory_for_string); // has string
+    printf("String in original: %s\n", original); // is '\0' because of swap
+    free(new_memory_for_string);
+}
+
+void swap(char *a, char *b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
